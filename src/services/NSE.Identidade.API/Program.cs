@@ -14,14 +14,28 @@ builder.Services.AddDefaultIdentity<IdentityUser>()
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "NerdStore Enterprise Identity API",
+        Description = "Esta API faz parte de estudos pessoais sobre Enterprise Applications.",
+        Contact = new Microsoft.OpenApi.Models.OpenApiContact() { Name = "Diego Coelho", Email = "diegocoelhosp@gmail.com" },
+        License = new Microsoft.OpenApi.Models.OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
+    });
+});
 
 var app = builder.Build();
 
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+});
+
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
 
 app.UseHttpsRedirection();
