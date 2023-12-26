@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
-
-namespace NSE.WebApp.MVC.Configuration
+﻿namespace NSE.WebApp.MVC.Configuration
 {
     public static class WebAppConfig
     {
